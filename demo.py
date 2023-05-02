@@ -1,5 +1,6 @@
 import requests
 import re
+from datetime import datetime
 # Socks listener connection
 proxy  = {
 	"https" : "socks5h://127.0.0.1:9050",
@@ -14,7 +15,6 @@ proxy  = {
 ''' #TODO : im tired -highest priority
 
 
-#books/category/porn?="arpan"
 
 
 def parseOnions(url : str) -> list : # maybe convert 'set' back to list for better functionality
@@ -26,7 +26,9 @@ def parseOnions(url : str) -> list : # maybe convert 'set' back to list for bett
 		exit() # TODO : write a try except block
 	data = list(set(data))
 	data = [i+"\n" for i in data ]
-	with open("link_database.txt","a") as file:
+	# write to a file
+	with open("link_database.txt","a") as file: #TODO : write to a csv file instead with the search term
+		file.write("======================= " + datetime.now().isoformat() + " ====================\n")
 		file.writelines(data)
 	return data
 
